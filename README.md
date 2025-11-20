@@ -1,2 +1,56 @@
-# secure-pass-cli
-A simple command line interface (CLI) based password generator written in Python.
+# SecurePass CLI: パスワード保証型生成ツール
+このツールは、Pythonで書かれたシンプルで強力なコマンドラインインターフェース（CLI）ベースのパスワード生成ツールです。
+一般的なランダム生成ツールとは異なり、このツールは、生成されるすべてのパスワードが現代のセキュリティ基準を満たすよう、**4つの必須文字種（小文字、大文字、数字、記号）**の少なくとも1文字を含むことを保証します。
+
+## 📸 デモンストレーション
+![secure-pass-cli 実行画面](demo.png) 
+
+## 🚀 主な機能
+* セキュリティ保証: 生成されるすべてのパスワードには、最低1文字の小文字、大文字、数字、記号が含まれることが保証されています。
+* 柔軟な長さ: ユーザーは任意の長さ（最低4文字）を指定できます。
+* シンプルなCLI: 分かりやすい出力とエラー処理を備えた、使いやすいコマンドラインインターフェースです。
+* Python標準ライブラリ: 標準のPythonライブラリ（random, string）のみを使用しているため、外部依存関係は必要ありません。
+
+## 🛠️ 技術解説: 4段階の保証プロセス
+この生成ロジックは、ランダム化する前にすべての文字タイプを含めることを確実に行い、弱いパスワードが生成されるのを防ぐように設計されています。
+
+1. 要件チェック: ツールはまず、要求された長さが最低4文字（必須文字種の数）であることを確認します。
+2. 保証文字の選択: 4つの必須文字セット（LOWERCASE、UPPERCASE、DIGITS、SYMBOLS）のそれぞれから、ランダムに1文字ずつ選択し、パスワードリストに追加します。
+3. 埋め文字の生成: 目標の長さに達するために残っている文字数分、結合された全文字プールから完全にランダムに文字を選択します。
+4. セキュリティシャッフル: 最終的な文字リスト（保証文字 + 埋め文字）は、random.shuffle() を使用して完全にランダムにシャッフルされます。これにより、必須文字が予測可能な位置（例：常に先頭）に配置されるのを防ぎ、セキュリティを強化します。
+
+## 💻 実行方法
+1. Pythonコードを password_generator.py という名前で保存します。
+2. ターミナルまたはコマンドプロンプトで以下のコマンドを実行します。
+   python password_generator.py
+
+
+----- **English Version** -----
+
+# SecurePass CLI
+
+This tool is a simple yet powerful command-line interface (CLI) password generation tool written in Python.
+
+Unlike common random generation tools, this utility **guarantees** that every generated password meets modern security standards by including at least one character from each of the **four required character types (lowercase, uppercase, digits, and symbols)**.
+
+## 📸 Demonstration
+![secure-pass-cli execution screenshot](demo.png)
+
+## 🚀 Key Features
+* Security Guarantee: Every generated password is guaranteed to contain at least one lowercase, uppercase, digit, and symbol character.
+* Flexible Length: Users can specify any desired length (minimum 4 characters).
+* Simple CLI: An easy-to-use command-line interface with clear output and robust error handling.
+* Python Standard Library: Uses only standard Python libraries (`random`, `string`), eliminating the need for external dependencies.
+
+## 🛠️ Technical Deep Dive: The 4-Stage Guarantee Process
+The generation logic is designed to prevent weak passwords by ensuring the inclusion of all character types before randomization.
+
+1.  Requirement Check: The tool first verifies that the requested length is a minimum of 4 characters (the number of required character sets).
+2.  Guaranteed Selection: One random character is selected from each of the four required character sets (LOWERCASE, UPPERCASE, DIGITS, SYMBOLS) and appended to the password list.
+3.  Filler Generation: The remaining character slots needed to reach the target length are filled by selecting characters completely at random from the combined general character pool.
+4.  Security Shuffle: The final list of characters (guaranteed characters + filler characters) is **completely randomly shuffled** using `random.shuffle()`. This prevents the required characters from being placed in predictable positions (e.g., always at the beginning), thus strengthening security.
+
+## 💻 How to Run
+1.  Save the Python code as `password_generator.py`.
+2.  Execute the following command in your terminal or command prompt:
+    python password_generator.py
