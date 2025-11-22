@@ -42,6 +42,7 @@
    python password_generator.py
 
 
+---
 ----- **English Version** -----
 
 # SecurePass CLI
